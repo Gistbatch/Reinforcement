@@ -7,7 +7,7 @@ from bandit import Bandit
 def run_experiment(number_bandits, epsilon, iterations):
     bandits = [Bandit(i + 1) for i in range(number_bandits)]
     current_best = bandits[np.random.randint(0, number_bandits)]
-    data = []
+    data = np.empty(iterations)
     print(f'Starting with bandit {current_best.true_mean}.')
     for i in range(iterations):
         explore_exploit = np.random.randn()
@@ -30,7 +30,7 @@ def run_experiment(number_bandits, epsilon, iterations):
     cumulative_average = np.cumsum(data) / (np.arange(iterations) + 1)
     plt.plot(cumulative_average)
     for i in range(number_bandits):
-        plt.plot(np.ones(iterations) * i)
+        plt.plot(np.ones(iterations) * (i+1))
     plt.xscale('log')
     plt.show()
     return cumulative_average
