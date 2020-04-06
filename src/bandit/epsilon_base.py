@@ -7,6 +7,7 @@ if __name__ == "__main__":
     bandits = [Bandit(i) for i in range(number_bandits)]
     epsilon = 0.1
     current_best = bandits[np.random.randint(0, number_bandits)]
+    print(f'Starting with bandit {current_best.true_avg}.')
     for _ in range(1000):
         explore_exploit = np.random.random_sample()
         bandit = current_best
