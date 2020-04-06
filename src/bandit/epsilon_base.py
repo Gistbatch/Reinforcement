@@ -10,7 +10,7 @@ def run_experiment(number_bandits, epsilon, iterations):
     data = np.empty(iterations)
     print(f'Starting with bandit {current_best.true_mean}.')
     for i in range(iterations):
-        explore_exploit = np.random.randn()
+        explore_exploit = np.random.rand()
         bandit = current_best
         # explore
         if explore_exploit < epsilon:
@@ -37,9 +37,9 @@ def run_experiment(number_bandits, epsilon, iterations):
 
 
 if __name__ == "__main__":
-    epsilon_1 = run_experiment(3, 0.1, 10000)
-    epsilon_05 = run_experiment(3, 0.05, 10000)
-    epsilon_01 = run_experiment(3, 0.01, 10000)
+    epsilon_1 = run_experiment(3, 0.1, 100000)
+    epsilon_05 = run_experiment(3, 0.05, 100000)
+    epsilon_01 = run_experiment(3, 0.01, 100000)
 
     # log scale plot
     plt.plot(epsilon_1, label='eps = 0.1')
