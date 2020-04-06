@@ -2,17 +2,17 @@ import numpy as np
 
 
 class Bandit:
-    def __init__(self, true_avg):
-        self.true_avg = true_avg
+    def __init__(self, true_mean):
+        self.true_mean = true_mean
         self.times_pulled = 0
-        self.current_avg = 0
+        self.current_mean = 0
 
     def pull(self):
         self.times_pulled += 1
-        value = self.true_avg * np.random.random_sample()
+        value = self.true_mean + np.random.randn()
         #print(f'{value} was rolled.')
         return value
 
-    def update_avg(self, value):
+    def update(self, value):
         one_by_n = 1 / self.times_pulled
-        self.current_avg = (1 - one_by_n) * self.current_avg + one_by_n * value
+        self.current_mean = (1 - one_by_n) * self.current_mean + one_by_n * value
