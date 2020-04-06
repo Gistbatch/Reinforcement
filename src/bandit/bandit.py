@@ -2,10 +2,10 @@ import numpy as np
 
 
 class Bandit:
-    def __init__(self, true_mean):
+    def __init__(self, true_mean, current_mean=0):
         self.true_mean = true_mean
         self.times_pulled = 0
-        self.current_mean = 0
+        self.current_mean = current_mean
 
     def pull(self):
         self.times_pulled += 1
