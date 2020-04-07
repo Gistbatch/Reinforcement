@@ -25,8 +25,20 @@ class Environment:
             return 'O'
         return ' '
 
-    def get_state(self):
-        return self.state
+    def get_state_as_int(self):
+        k = 0
+        h = 0
+        for i in range(3):
+            for j in range(3):
+                if self.state[i,j] == 0:
+                    v = 0
+                elif self.state[i,j] == 1:
+                    v = 1
+                elif self.state[i,j] == -1:
+                    v = 2
+                h += (3**k) * v
+                k += 1
+        return h
 
     def is_empty(self, i, j):
         return self.state[i][j] == 0
@@ -83,6 +95,26 @@ class Environment:
             return True
         self.winner = 0
         return False
+
+    def possibilities(self, i=0, j=0):
+        results = []
+        for v in (0, 1, -1):
+            self.state[i,j] = v # if empty board it should already be 0
+            if j == 2:
+            # j goes back to 0, increase i, unless i = 2, then we are done
+                if i == 2:
+                    # the board is full, collect results and return
+                    state = self.get_state_as_int()
+                    ended = self.game_over()
+                    winner = self.winner
+                    results.append((state, winner, ended))
+                else:
+                    results += self.possibilities(i + 1, 0)
+            else:
+            # increment j, i stays the same
+                results += self.possibilities(i, j + 1)
+
+        return results
 
 if __name__ == "__main__":
     env = Environment()
