@@ -72,20 +72,20 @@ class Environment:
             self.is_over = True
             return True
         #diag
-        if 3 ==  np.sum(np.diag(self.state)):
+        if 3 ==  self.state.trace():
             self.winner = 1
             self.is_over = True
             return True
-        if -3 ==  np.sum(np.diag(self.state)):
+        if -3 ==  self.state.trace():
             self.winner = -1
             self.is_over = True
             return True
         #reverse diag
-        if 3 == np.sum(np.diag(np.fliplr(self.state))):
+        if 3 == np.fliplr(self.state).trace():
             self.winner = 1
             self.is_over = True
             return True
-        if -3 == np.sum(np.diag(np.fliplr(self.state))):
+        if -3 == np.fliplr(self.state).trace():
             self.winner = -1
             self.is_over = True
             return True
