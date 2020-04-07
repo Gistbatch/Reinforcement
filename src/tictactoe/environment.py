@@ -116,8 +116,3 @@ class Environment:
                 results += self.possibilities(i, j + 1)
 
         return results
-
-if __name__ == "__main__":
-    env = Environment()
-    env.print_board()
-    print(env.is_over())
