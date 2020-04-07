@@ -5,9 +5,9 @@ class Agent:
     def __init__(self, sign, alpha=0.5, epsilon=0.1):
         self.alpha = alpha
         self.epsilon = epsilon
-        self.sign = 1 if sign is 'X' else -1
+        self.sign = 1 if sign == 'X' else -1
         self.history = []
-        self.values = np.Zeros(3**9)
+        self.values = np.zeros(3**9)
 
     def update_history(self, state):
         self.history.append(state)
@@ -16,7 +16,7 @@ class Agent:
         self.history = []
 
     def init_value(self, env):
-        for state, winner, ended in env.possibilites():
+        for state, winner, ended in env.possibilities():
             if ended:
                 if winner == self.sign:
                     val = 1
@@ -50,9 +50,9 @@ class Agent:
         env.state[next_action[0], next_action[1]] = self.sign
 
     def update_value(self, env):
-        reward = env.reward(self.sign)
+        reward = env.reward(self)
         target = reward  # reward of following state t+1 init with terminal state
-        for state in self.history.reverse():
+        for state in reversed(self.history):
             val = self.values[state] + self.alpha * (target -
                                                      self.values[state])
             self.values[state] = val

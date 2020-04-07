@@ -6,7 +6,7 @@ class Environment:
         self.is_over = False
         self.winner = 0
 
-    def print_board(self):
+    def print_board(self, turn):
         states = np.reshape(self.state, 9)
         output = ''
         for index, state in enumerate(states):
@@ -16,6 +16,7 @@ class Environment:
                 output += self.add_sign(state) + '|'
             else:
                 output += self.add_sign(state)
+        output += '\n' + str(turn) +'___________\n'
         print(output)
 
     def add_sign(self, value):
@@ -47,7 +48,7 @@ class Environment:
         return self.is_over and not self.winner
 
     def reward(self, agent):
-        if not self.is_Over:
+        if not self.is_over:
             return 0
         return 1 if self.winner == agent.sign else 0
 
