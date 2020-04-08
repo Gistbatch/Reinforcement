@@ -59,7 +59,7 @@ def policy_evaluation(grid, discount, policy=None, values=None):
     return values
 
 
-def poilcy_iteration(grid, discount):
+def policy_iteration(grid, discount):
     #init
     states = grid.all_states()
     policy = {}
@@ -126,7 +126,7 @@ def iteration_example():
     grid = Gridworld.negative_grid()
     print('grid:')
     print_values(grid.rewards, grid)
-    values, policy = poilcy_iteration(grid, 0.9)
+    values, policy = policy_iteration(grid, 0.9)
     print('values:')
     print_values(values, grid)
     print('policy:')
