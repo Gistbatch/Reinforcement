@@ -75,7 +75,8 @@ def poilcy_iteration(grid, discount):
             values[state] = np.random.rand()
     print('initial value:s')
     print_values(values, grid)
-    while True:
+    policy_converged = False
+    while not policy_converged:
         values = policy_evaluation(grid, discount, policy, values)
         policy_converged = True
         for state in states:
@@ -94,9 +95,6 @@ def poilcy_iteration(grid, discount):
                 policy[state] = new_action
                 if old_action != new_action:
                     policy_converged = False
-        
-        if policy_converged:
-            break
 
     return values, policy
 
