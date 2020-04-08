@@ -41,9 +41,6 @@ class Gridworld:
         return self.rewards.get(self.get_state(), 0)
 
     def undo_action(self, action):
-        """
-        Should only be called after do_action()
-        """
         if action == 'U':
             self.i_pos += 1
         elif action == 'D':
