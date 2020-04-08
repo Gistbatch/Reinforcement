@@ -38,6 +38,7 @@ class Gridworld:
             else:
                 pass
         assert (self.get_state in self.all_states())
+        return self.rewards.get(self.get_state(), 0)
 
     def undo_action(self, action):
         if action in self.actions:
