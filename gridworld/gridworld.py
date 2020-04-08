@@ -26,7 +26,7 @@ class Gridworld:
         return self.is_terminal((self.i_pos, self.j_pos))
 
     def do_action(self, action):
-        if action in self.actions:
+        if action in self.actions[self.get_state()]:
             if action == 'U':
                 self.i_pos -= 1
             elif action == 'D':
@@ -37,22 +37,24 @@ class Gridworld:
                 self.j_pos += 1
             else:
                 pass
-        assert (self.get_state in self.all_states())
+        assert (self.get_state() in self.all_states())
         return self.rewards.get(self.get_state(), 0)
 
     def undo_action(self, action):
-        if action in self.actions:
-            if action == 'U':
-                self.i_pos += 1
-            elif action == 'D':
-                self.i_pos -= 1
-            elif action == 'L':
-                self.j_pos += 1
-            elif action == 'R':
-                self.j_pos -= 1
-            else:
-                pass
-        assert (self.get_state in self.all_states())
+        """
+        Should only be called after do_action()
+        """
+        if action == 'U':
+            self.i_pos += 1
+        elif action == 'D':
+            self.i_pos -= 1
+        elif action == 'L':
+            self.j_pos += 1
+        elif action == 'R':
+            self.j_pos -= 1
+        else:
+            pass
+        assert (self.get_state() in self.all_states())
 
     @staticmethod
     def default_grid():
@@ -60,12 +62,12 @@ class Gridworld:
         rewards = {(0, 3): 1, (1, 3): -1}
         actions = {
             (0, 0): ('D', 'R'),
-            (0, 1): ('D', 'R', 'L'),
+            (0, 1): ('R', 'L'),
             (0, 2): ('D', 'R', 'L'),
-            (1, 0): ('D', 'U', 'R'),
+            (1, 0): ('D', 'U'),
             (1, 2): ('D', 'U', 'R'),
             (2, 0): ('U', 'R'),
-            (2, 1): ('U', 'R', 'L'),
+            (2, 1): ('R', 'L'),
             (2, 2): ('U', 'R', 'L'),
             (2, 3): ('U', 'L')
         }
