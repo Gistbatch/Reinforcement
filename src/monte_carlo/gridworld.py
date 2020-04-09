@@ -26,7 +26,8 @@ class Gridworld:
         return self.is_terminal((self.i_pos, self.j_pos))
 
     def do_action(self, action):
-        if action in self.actions[self.get_state()]:
+        if self.get_state() in self.actions.keys() and action in self.actions[
+                self.get_state()]:
             if action == 'U':
                 self.i_pos -= 1
             elif action == 'D':
