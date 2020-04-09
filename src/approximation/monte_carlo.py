@@ -69,8 +69,8 @@ def feature(state):
     return np.array([state[0] - 1, state[1] - 1.5, state[0] * state[1] - 3, 1])
 
 
-def approx_monte_carlo(grid, policy, iterations=20000, learning_rate_0=0.1):
-    theta =np.array(np.random.randn(4))
+def approx_monte_carlo(grid, policy, iterations=20000, learning_rate_0=0.001):
+    theta =np.array(np.random.randn(4)) / 2
     decay = 1.0
     deltas = []
     for index in range(iterations):
