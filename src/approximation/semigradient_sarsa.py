@@ -87,15 +87,6 @@ class Model:
 def gradient_sarsa(grid, iterations=20000, discount=0.9, alpha_0=0.1):
     decay = 1.0
     deltas = []
-    feature_mapping = {}
-    feature_index = 0
-    states = grid.all_states()
-    for state in states:
-        feature_mapping[state] = {}
-        for action in POSSIBLE_ACTIONS:
-            feature_mapping[state][action] = 0
-            feature_index += 1
-
     model = Model()
     for step in range(iterations):
         delta = 0
@@ -128,8 +119,10 @@ def gradient_sarsa(grid, iterations=20000, discount=0.9, alpha_0=0.1):
             delta = max(delta, np.abs(old_theta - model.theta).sum())
 
         deltas.append(delta)
+    
     values = {}
     policy = {}
+    states = grid.all_states()
     for state in states:
         if not grid.is_terminal(state):
             action, value = max_dict(getQs(model, state))
