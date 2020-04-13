@@ -42,7 +42,7 @@ def param_search():
     lengths, params = find_params(env)
     plt.plot(lengths)
     plt.show()
-    env = wrappers.Monitor(env, '../../output', force=True)
+    env = wrappers.Monitor(env, '../output', force=True)
     avg = avg_length(env, params)
     print(f'Average of best params is: {avg}')
 
