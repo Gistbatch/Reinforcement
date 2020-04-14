@@ -105,13 +105,13 @@ def cart_pole():
     transformer = FeatureTransformer(env)
     model = Model(env, transformer)
     env = wrappers.Monitor(env, 'output/' + str(uuid.uuid4()))
-    iterations = 500
+    iterations = 100
     rewards = np.empty(iterations)
     for index in range(iterations):
         epsilon = 0.1 * (0.97**index)
         current_reward = play_episode(model, epsilon)
         rewards[index] = current_reward
-        if (index + 1) % 100 == 0:
+        if (index + 1) % 10 == 0:
             print(
                 f'episode: {index} reward {current_reward} epsilon: {epsilon}')
     print(f'avg reward for last 100 episodes: {rewards[-100:].mean()}')
