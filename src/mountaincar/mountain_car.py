@@ -122,7 +122,7 @@ def mountain_car():
             print(
                 f'episode: {index} reward {current_reward} epsilon: {epsilon}')
     print(f'avg reward for last 100 episodes: {rewards[-100:].mean()}')
-    print(f'total steps {-krewards.sum()}')
+    print(f'total steps {-rewards.sum()}')
 
     plt.plot(rewards)
     plt.title('Rewards')
